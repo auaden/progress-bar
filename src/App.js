@@ -8,6 +8,8 @@ import ProgressBarPicker from './components/ProgressBarPicker'
 class App extends Component {
   constructor () {
     super()
+    this.onButtonClick = this.onButtonClick.bind(this)
+    this.onDropdownChange = this.onDropdownChange.bind(this)
     this.state = {
       data: null,
       currentBarIndex: 0
@@ -20,13 +22,22 @@ class App extends Component {
     this.setState({ data })
   }
 
-  onButtonClick = (progress) => {
+  calculateProgress (currentValue, delta) {
+    const updatedBar = currentValue + delta
+    if (updatedBar < 0) {
+      return 0
+    }
+
+    return updatedBar
+  }
+
+  onButtonClick (progress) {
     const {
       data: { bars },
       currentBarIndex
     } = this.state
-    
-    bars[currentBarIndex] = bars[currentBarIndex] + progress
+
+    bars[currentBarIndex] = this.calculateProgress(bars[currentBarIndex], progress)
 
     this.setState({
       data: {
@@ -36,8 +47,8 @@ class App extends Component {
     })
   }
 
-  onDropdownChange = (index) => {
-    this.setState({ currentBarIndex: index})
+  onDropdownChange (index) {
+    this.setState({ currentBarIndex: index })
   }
 
   render () {
@@ -59,7 +70,7 @@ class App extends Component {
         <header className='App-header'>
           <h1 className='App-title'>Welcome to my progress bars</h1>
         </header>
-      
+
         <ProgressBar
           bars={bars}
           currentBarIndex={currentBarIndex}
