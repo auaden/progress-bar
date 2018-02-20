@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import './App.css'
 import ButtonCollection from './components/ButtonCollection'
+import ProgressBar from './components/ProgressBar'
 
 class App extends Component {
   constructor () {
@@ -24,8 +25,14 @@ class App extends Component {
       data: { bars },
       currentBarIndex
     } = this.state
-
     bars[currentBarIndex] = bars[currentBarIndex] + progress
+
+    this.setState({
+      data: {
+        ...this.state.data,
+        bars
+      }
+    })
   }
 
   render () {
@@ -34,16 +41,23 @@ class App extends Component {
     }
 
     const {
-      buttons
-      // bars,
-      // limit
-    } = this.state.data
+      data: {
+        buttons,
+        bars
+        // limit
+      },
+      currentBarIndex
+    } = this.state
 
     return (
       <div className='App'>
         <header className='App-header'>
           <h1 className='App-title'>Welcome to my progress bars</h1>
         </header>
+        <ProgressBar
+          bars={bars}
+          currentBarIndex={currentBarIndex}
+        />
         <ButtonCollection
           onClick={this.onButtonClick}
           buttons={buttons}
