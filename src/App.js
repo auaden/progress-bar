@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Header, Menu, Grid, Segment } from 'semantic-ui-react'
 import './App.css'
 import ButtonCollection from './components/ButtonCollection'
 import ProgressBar from './components/ProgressBar'
@@ -67,24 +68,52 @@ class App extends Component {
 
     return (
       <div className='App'>
-        <header className='App-header'>
-          <h1 className='App-title'>Welcome to my progress bars</h1>
-        </header>
+        <Grid stackable padded>
+          <Grid.Row>
+            <Grid.Column width={16}>
+              <Segment clearing>
+                <Header as='h2'>
+                  Mars Bars
+                </Header>
+              </Segment>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column width={4}>
+              <Menu vertical compact fluid stackable>
+                <Menu.Item
+                  name='picker'
+                >
+                  <Header as='h4'>Picker</Header>
+                  <ProgressBarPicker
+                    bars={bars}
+                    currentBarIndex={currentBarIndex}
+                    onChange={this.onDropdownChange}
+                  />
+                </Menu.Item>
 
-        <ProgressBar
-          bars={bars}
-          currentBarIndex={currentBarIndex}
-          limit={limit}
-        />
-        <ButtonCollection
-          onClick={this.onButtonClick}
-          buttons={buttons}
-        />
-        <ProgressBarPicker
-          bars={bars}
-          currentBarIndex={currentBarIndex}
-          onChange={this.onDropdownChange}
-        />
+                <Menu.Item
+                  name='buttons'
+                >
+                  <Header as='h4'>Controls</Header>
+                  <ButtonCollection
+                    onClick={this.onButtonClick}
+                    buttons={buttons}
+                  />
+                </Menu.Item>
+              </Menu>
+            </Grid.Column>
+            <Grid.Column width={12}>
+              <Segment clearing>
+                <ProgressBar
+                  bars={bars}
+                  currentBarIndex={currentBarIndex}
+                  limit={limit}
+                />
+              </Segment>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </div>
     )
   }
