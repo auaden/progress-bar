@@ -6,8 +6,10 @@ import ButtonCollection from './components/ButtonCollection'
 class App extends Component {
   constructor () {
     super()
+    this.onButtonClick = this.onButtonClick.bind(this)
     this.state = {
-      data: null
+      data: null,
+      currentBarIndex: 0
     }
   }
 
@@ -17,19 +19,35 @@ class App extends Component {
     this.setState({ data })
   }
 
+  onButtonClick (progress) {
+    const {
+      data: { bars },
+      currentBarIndex
+    } = this.state
+
+    bars[currentBarIndex] = bars[currentBarIndex] + progress
+  }
+
   render () {
     if (!this.state.data) {
       return <div>Loading</div>
     }
 
-    const { buttons, bars, limit } = this.state.data
+    const {
+      buttons
+      // bars,
+      // limit
+    } = this.state.data
 
     return (
       <div className='App'>
         <header className='App-header'>
           <h1 className='App-title'>Welcome to my progress bars</h1>
         </header>
-        <ButtonCollection buttons={buttons} />
+        <ButtonCollection
+          onClick={this.onButtonClick}
+          buttons={buttons}
+        />
       </div>
     )
   }
