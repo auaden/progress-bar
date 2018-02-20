@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Header, Menu, Grid, Segment } from 'semantic-ui-react'
+import { Header, Menu, Grid, Segment, Loader } from 'semantic-ui-react'
 import './App.css'
 import ButtonCollection from './components/ButtonCollection'
 import ProgressBar from './components/ProgressBar'
@@ -19,7 +19,6 @@ class App extends Component {
 
   async componentDidMount () {
     const { data } = await axios.get('http://pb-api.herokuapp.com/bars')
-    console.log('data from api', data)
     this.setState({ data })
   }
 
@@ -54,7 +53,7 @@ class App extends Component {
 
   render () {
     if (!this.state.data) {
-      return <div>Loading</div>
+      return <Loader active />
     }
 
     const {
@@ -67,54 +66,52 @@ class App extends Component {
     } = this.state
 
     return (
-      <div className='App'>
-        <Grid stackable padded>
-          <Grid.Row>
-            <Grid.Column width={16}>
-              <Segment clearing>
-                <Header as='h2'>
+      <Grid stackable padded>
+        <Grid.Row>
+          <Grid.Column width={16}>
+            <Segment clearing>
+              <Header as='h2'>
                   Mars Bars
-                </Header>
-              </Segment>
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row>
-            <Grid.Column width={4}>
-              <Menu vertical compact fluid stackable>
-                <Menu.Item
-                  name='picker'
-                >
-                  <Header as='h4'>Picker</Header>
-                  <ProgressBarPicker
-                    bars={bars}
-                    currentBarIndex={currentBarIndex}
-                    onChange={this.onDropdownChange}
-                  />
-                </Menu.Item>
-
-                <Menu.Item
-                  name='buttons'
-                >
-                  <Header as='h4'>Controls</Header>
-                  <ButtonCollection
-                    onClick={this.onButtonClick}
-                    buttons={buttons}
-                  />
-                </Menu.Item>
-              </Menu>
-            </Grid.Column>
-            <Grid.Column width={12}>
-              <Segment clearing>
-                <ProgressBar
+              </Header>
+            </Segment>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column width={4}>
+            <Menu vertical compact fluid stackable>
+              <Menu.Item
+                name='picker'
+              >
+                <Header as='h4'>Picker</Header>
+                <ProgressBarPicker
                   bars={bars}
                   currentBarIndex={currentBarIndex}
-                  limit={limit}
+                  onChange={this.onDropdownChange}
                 />
-              </Segment>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </div>
+              </Menu.Item>
+
+              <Menu.Item
+                name='buttons'
+              >
+                <Header as='h4'>Controls</Header>
+                <ButtonCollection
+                  onClick={this.onButtonClick}
+                  buttons={buttons}
+                />
+              </Menu.Item>
+            </Menu>
+          </Grid.Column>
+          <Grid.Column width={12}>
+            <Segment clearing>
+              <ProgressBar
+                bars={bars}
+                currentBarIndex={currentBarIndex}
+                limit={limit}
+              />
+            </Segment>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     )
   }
 }
