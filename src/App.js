@@ -59,8 +59,8 @@ class App extends Component {
     const {
       data: {
         buttons,
-        bars
-        // limit
+        bars,
+        limit
       },
       currentBarIndex
     } = this.state
@@ -74,6 +74,7 @@ class App extends Component {
         <ProgressBar
           bars={bars}
           currentBarIndex={currentBarIndex}
+          limit={limit}
         />
         <ButtonCollection
           onClick={this.onButtonClick}
