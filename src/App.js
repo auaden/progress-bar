@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Header, Menu, Grid, Segment, Loader } from 'semantic-ui-react'
 import './App.css'
 import ButtonCollection from './components/ButtonCollection'
-import ProgressBar from './components/ProgressBar'
+import ProgressBarCollection from './components/ProgressBarCollection'
 import ProgressBarPicker from './components/ProgressBarPicker'
 
 class App extends Component {
@@ -101,7 +101,7 @@ class App extends Component {
           </Grid.Column>
           <Grid.Column width={12}>
             <Segment clearing>
-              <ProgressBar
+              <ProgressBarCollection
                 bars={bars}
                 currentBarIndex={currentBarIndex}
                 limit={limit}
