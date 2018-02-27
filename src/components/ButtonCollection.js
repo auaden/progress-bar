@@ -1,7 +1,6 @@
 import React from 'react'
 import { map, sortBy } from 'lodash'
 import { Button } from 'semantic-ui-react'
-// import './styles/ButtonCollectionStyles.css'
 
 export default ({ buttons, onClick }) => {
   const sortedButtons = sortBy(buttons)

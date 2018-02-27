@@ -1,11 +1,8 @@
 import React from 'react'
 import { map } from 'lodash'
 import { Progress, Header } from 'semantic-ui-react'
-// import './styles/ButtonCollectionStyles.css'
 
 export default ({ bars, currentBarIndex, limit }) => {
-  // const currentBar = bars[currentBarIndex]
-
   return map(bars, (bar, index) => {
     const percentage = (bar / limit) * 100
     const color = currentBarIndex === index ? 'teal' : 'grey'

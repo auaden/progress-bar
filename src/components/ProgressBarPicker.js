@@ -1,6 +1,7 @@
 import React from 'react'
 import { each } from 'lodash'
 import { Dropdown } from 'semantic-ui-react'
+
 export default ({ bars, currentBarIndex, onChange }) => {
   const pickerOptions = []
   each(bars, (bar, index) => {
