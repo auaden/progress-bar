@@ -4,16 +4,16 @@ import ButtonCollection from './ButtonCollection'
 import ProgressBarCollection from './ProgressBarCollection'
 import ProgressBarPicker from './ProgressBarPicker'
 
-export default ({ data, currentBarIndex, onClick, onDropdownChange }) => {
+export default ({ data, currentBarIndex, onButtonClick, onDropdownChange }) => {
+  if (!data) {
+    return <Loader active />
+  }
+
   const {
     buttons,
     bars,
     limit
   } = data
-
-  if (!data) {
-    return <Loader active />
-  }
 
   return (
     <Grid stackable padded>
@@ -36,7 +36,7 @@ export default ({ data, currentBarIndex, onClick, onDropdownChange }) => {
               <ProgressBarPicker
                 bars={bars}
                 currentBarIndex={currentBarIndex}
-                onChange={this.onDropdownChange}
+                onChange={onDropdownChange}
               />
             </Menu.Item>
 
@@ -45,7 +45,7 @@ export default ({ data, currentBarIndex, onClick, onDropdownChange }) => {
             >
               <Header as='h4'>Controls</Header>
               <ButtonCollection
-                onClick={this.onButtonClick}
+                onClick={onButtonClick}
                 buttons={buttons}
               />
             </Menu.Item>
