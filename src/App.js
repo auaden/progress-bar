@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Header, Menu, Grid, Segment, Loader } from 'semantic-ui-react'
 import './App.css'
-import ButtonCollection from './components/ButtonCollection'
-import ProgressBarCollection from './components/ProgressBarCollection'
-import ProgressBarPicker from './components/ProgressBarPicker'
 
+import MainCanvas from './components/MainCanvas'
 class App extends Component {
   constructor () {
     super()
@@ -52,66 +49,18 @@ class App extends Component {
   }
 
   render () {
-    if (!this.state.data) {
-      return <Loader active />
-    }
-
     const {
-      data: {
-        buttons,
-        bars,
-        limit
-      },
+      data,
       currentBarIndex
     } = this.state
 
     return (
-      <Grid stackable padded>
-        <Grid.Row>
-          <Grid.Column width={16}>
-            <Segment clearing>
-              <Header as='h2'>
-                  Mars Bars
-              </Header>
-            </Segment>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column width={4}>
-            <Menu vertical compact fluid stackable>
-              <Menu.Item
-                name='picker'
-              >
-                <Header as='h4'>Picker</Header>
-                <ProgressBarPicker
-                  bars={bars}
-                  currentBarIndex={currentBarIndex}
-                  onChange={this.onDropdownChange}
-                />
-              </Menu.Item>
-
-              <Menu.Item
-                name='buttons'
-              >
-                <Header as='h4'>Controls</Header>
-                <ButtonCollection
-                  onClick={this.onButtonClick}
-                  buttons={buttons}
-                />
-              </Menu.Item>
-            </Menu>
-          </Grid.Column>
-          <Grid.Column width={12}>
-            <Segment clearing>
-              <ProgressBarCollection
-                bars={bars}
-                currentBarIndex={currentBarIndex}
-                limit={limit}
-              />
-            </Segment>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      <MainCanvas
+        data={data}
+        currentBarIndex={currentBarIndex}
+        onButtonClick={this.onButtonClick}
+        onDropdownChange={this.onDropdownChange}
+      />
     )
   }
 }
