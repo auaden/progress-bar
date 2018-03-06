@@ -2,6 +2,11 @@
   "name": "progress-bar",
   "version": "0.1.0",
   "private": true,
+  "eslintConfig": {
+    "env": {
+      "jest": true
+    }
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "lodash": "^4.17.5",
@@ -14,12 +19,31 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "devDependencies": {
     "@storybook/react": "^3.3.14",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.1",
+    "identity-obj-proxy": "^3.0.0",
+    "react-test-renderer": "^16.2.0",
     "standard": "^11.0.0"
+  },
+  "jest": {
+    "setupFiles": [
+      "./test/jestsetup.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "moduleNameMapper": {
+      "^.+\\.(css|scss)$": "identity-obj-proxy"
+    }
   }
+
 }
