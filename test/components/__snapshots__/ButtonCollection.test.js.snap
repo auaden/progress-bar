@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render buttons 1`] = `
+<ButtonGroup
+  fluid={true}
+>
+  <Button
+    as="button"
+    compact={true}
+    key="0"
+    negative={false}
+    onClick={[Function]}
+    positive={true}
+  >
+    +20
+  </Button>
+</ButtonGroup>
+`;

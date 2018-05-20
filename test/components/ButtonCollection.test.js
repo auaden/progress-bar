@@ -2,8 +2,8 @@ import React from 'react'
 import ButtonCollection from '../../src/components/ButtonCollection'
 
 test('render buttons', () => {
-  const wrapper = shallow(
+  const wrapper = global.shallow(
     <ButtonCollection buttons={[20]} />
   )
-  // expect(wrapper).toMatchSnapshot()
+  expect(wrapper).toMatchSnapshot()
 })
